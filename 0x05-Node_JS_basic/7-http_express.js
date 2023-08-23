@@ -9,9 +9,7 @@ function countStudents(path) {
     readFile(path, 'utf8', (err, data) => {
       let output;
       if (err) {
-        output += 'This is the list of our students\n';
-        output += 'Cannot load the database';
-        reject(Error(output));
+        reject(err);
       } else {
         output = '';
         const numStudents = data.split('\n').length - 2;
@@ -53,8 +51,8 @@ app.get('/students', (req, res) => {
 
   countStudents(file).then((data) => {
     res.send(data);
-  }).catch((err) => {
-    res.send(err);
+  }).catch(() => {
+    res.send('This is the list of our students\nCannot load the database');
   });
 });
 
