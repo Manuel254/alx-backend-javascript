@@ -9,6 +9,7 @@ function countStudents(path) {
     readFile(path, 'utf8', (err, data) => {
       let output;
       if (err) {
+        output += 'This is the list of our students\n';
         output += 'Cannot load the database';
         reject(Error(output));
       } else {
